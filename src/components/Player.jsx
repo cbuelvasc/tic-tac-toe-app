@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { bool, func, string } from "prop-types";
+import { string } from "prop-types";
 
-function Player({ initialName, symbol, isActive, onSelect }) {
+function Player({ initialName, symbol }) {
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -36,8 +36,6 @@ function Player({ initialName, symbol, isActive, onSelect }) {
 Player.propTypes = {
   initialName: string.isRequired,
   symbol: string.isRequired,
-  isActive: bool.isRequired,
-  onSelect: func.isRequired,
 };
 
 export default Player;
