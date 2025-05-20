@@ -21,11 +21,12 @@ This project is a simple yet interactive Tic-Tac-Toe game that allows two player
 - JavaScript (ES6+)
 - CSS3
 - Prop-Types for type checking
+- GitHub Actions for CI/CD
 
 ## Project Structure
 
 ```
-02-tic-tac-toe-app/
+tic-tac-toe-app/
 ├── public/            # Static assets
 ├── src/               # Source code
 │   ├── assets/        # Images and other assets
@@ -35,6 +36,9 @@ This project is a simple yet interactive Tic-Tac-Toe game that allows two player
 │   ├── App.jsx        # Main application component
 │   ├── index.css      # Global styles
 │   └── main.jsx       # Entry point
+├── .github/           # GitHub configuration
+│   └── workflows/     # GitHub Actions workflows
+│       └── deployment.yml # Deployment workflow
 ├── .gitignore         # Git ignore file
 ├── eslint.config.js   # ESLint configuration
 ├── index.html         # HTML entry point
@@ -75,6 +79,26 @@ This project is a simple yet interactive Tic-Tac-Toe game that allows two player
 - `npm run build` - Builds the app for production
 - `npm run lint` - Runs ESLint to check code quality
 - `npm run preview` - Previews the production build locally
+
+## Deployment
+
+This project uses GitHub Actions for continuous integration and deployment. The workflow is configured to:
+
+1. **Lint**: Check code quality with ESLint
+2. **Build**: Create a production-ready build of the application
+3. **Deploy**: Deploy the application to the target server
+
+The deployment process is triggered automatically when changes are pushed to the `master` branch.
+
+### GitHub Actions Workflow
+
+The workflow consists of three jobs:
+
+- **Lint**: Checks code quality
+- **Build**: Compiles the application and creates a production build
+- **Deploy**: Deploys the build artifacts to the server
+
+To modify the deployment configuration, edit the `.github/workflows/deployment.yml` file.
 
 ## Future Enhancements
 

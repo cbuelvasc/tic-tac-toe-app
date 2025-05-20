@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { string } from "prop-types";
+import { bool, string } from "prop-types";
 
-function Player({ initialName, symbol }) {
+function Player({ initialName, symbol, isActive }) {
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -14,7 +14,7 @@ function Player({ initialName, symbol }) {
   }
 
   return (
-    <>
+    <li className={isActive ? "active" : undefined}>
       <span className="player">
         {isEditing ? (
           <input
@@ -29,13 +29,14 @@ function Player({ initialName, symbol }) {
         <span className="player-symbol">{symbol}</span>
       </span>
       <button onClick={handleEditClick}>{isEditing ? "Save" : "Edit"}</button>
-    </>
+    </li>
   );
 }
 
 Player.propTypes = {
   initialName: string.isRequired,
   symbol: string.isRequired,
+  isActive: bool.isRequired,
 };
 
 export default Player;
