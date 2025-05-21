@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { bool, string } from "prop-types";
+import { bool, func, string } from "prop-types";
 
-function Player({ initialName, symbol, isActive }) {
+function Player({ initialName, symbol, isActive, onChangeName }) {
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
 
   function handleEditClick() {
     setIsEditing((editing) => !editing);
+    if (isEditing) {
+      onChangeName(symbol, playerName);
+    }
   }
 
   function handleNameChange(event) {
@@ -37,6 +40,7 @@ Player.propTypes = {
   initialName: string.isRequired,
   symbol: string.isRequired,
   isActive: bool.isRequired,
+  onChangeName: func.isRequired,
 };
 
 export default Player;

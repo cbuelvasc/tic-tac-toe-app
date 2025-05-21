@@ -1,3 +1,5 @@
+import { array } from "prop-types";
+
 function Log({ turns }) {
   return (
     <ol id="log">
@@ -9,5 +11,9 @@ function Log({ turns }) {
     </ol>
   );
 }
+
+Log.propTypes = {
+  turns: array.isRequired,
+};
 
 export default Log;

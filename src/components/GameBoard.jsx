@@ -1,21 +1,9 @@
-const initialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
+import { array, func } from "prop-types";
 
-function GameBoard({ onSelectSquare, turns }) {
-  let gameBoard = initialGameBoard;
-
-  for (const turn of turns) {
-    const { square, player } = turn;
-    const { row, col } = square;
-    gameBoard[row][col] = player;
-  }
-
+function GameBoard({ onSelectSquare, board }) {
   return (
     <ol id="game-board">
-      {gameBoard.map((row, rowIndex) => (
+      {board.map((row, rowIndex) => (
         <li key={rowIndex}>
           <ol>
             {row.map((playerSymbol, colIndex) => (
@@ -23,6 +11,7 @@ function GameBoard({ onSelectSquare, turns }) {
                 <button
                   className="cell"
                   onClick={() => onSelectSquare(rowIndex, colIndex)}
+                  disabled={playerSymbol !== null}
                 >
                   {playerSymbol}
                 </button>
@@ -34,5 +23,10 @@ function GameBoard({ onSelectSquare, turns }) {
     </ol>
   );
 }
+
+GameBoard.propTypes = {
+  onSelectSquare: func.isRequired,
+  board: array.isRequired,
+};
 
 export default GameBoard;
