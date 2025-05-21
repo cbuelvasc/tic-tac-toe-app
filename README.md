@@ -31,8 +31,11 @@ tic-tac-toe-app/
 ├── src/               # Source code
 │   ├── assets/        # Images and other assets
 │   ├── components/    # React components
-│   │   ├── Header.jsx # Game header with logo
-│   │   └── Player.jsx # Player information component
+│   │   ├── GameBoard.jsx # Game board component
+│   │   ├── GameOver.jsx  # Game over component
+│   │   ├── Header.jsx    # Game header with logo
+│   │   ├── Log.jsx       # Game log component
+│   │   └── Player.jsx    # Player information component
 │   ├── App.jsx        # Main application component
 │   ├── index.css      # Global styles
 │   └── main.jsx       # Entry point
@@ -40,6 +43,7 @@ tic-tac-toe-app/
 │   └── workflows/     # GitHub Actions workflows
 │       └── deployment.yml # Deployment workflow
 ├── .gitignore         # Git ignore file
+├── Dockerfile         # Docker configuration
 ├── eslint.config.js   # ESLint configuration
 ├── index.html         # HTML entry point
 ├── package.json       # Dependencies and scripts
@@ -99,6 +103,48 @@ The workflow consists of three jobs:
 - **Deploy**: Deploys the build artifacts to the server
 
 To modify the deployment configuration, edit the `.github/workflows/deployment.yml` file.
+
+## Docker
+
+### Building the Docker image
+
+To build a Docker image of the application, run:
+
+```bash
+docker build . -t "tic-tac-toe-app:v1.0.0"
+```
+
+### Running the Docker container
+
+To run the application in a Docker container, execute:
+
+```bash
+docker run -dp 3000:3000 tic-tac-toe-app:v1.0.0
+```
+
+This will map port 3000 from the container to port 3000 on your host machine, allowing you to access the application at `http://localhost:3000`.
+
+### GitHub Container Registry
+
+The Docker image is also available in GitHub Container Registry. You can pull it with:
+
+```bash
+docker pull ghcr.io/cbuelvasc/tic-tac-toe-app:latest
+```
+
+Or use a specific version by SHA:
+
+```bash
+docker pull ghcr.io/cbuelvasc/tic-tac-toe-app:ab97ef11e77274b8596ceab6f8b4d3ce817dd444
+```
+
+To run the application using the image from GitHub Container Registry:
+
+```bash
+docker run -dp 3000:3000 ghcr.io/cbuelvasc/tic-tac-toe-app:latest
+```
+
+The Docker image is automatically built and published to GitHub Container Registry through GitHub Actions whenever changes are pushed to the master branch.
 
 ## Future Enhancements
 
